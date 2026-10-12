@@ -1,5 +1,7 @@
 <div align="center">
 
+![ADevz](https://img.shields.io/badge/dev-@aqshai-4dffa0?style=for-the-badge&labelColor=090d12)
+
 ```text
  ┌──────────────────────────────────────────────────┐
  │  devz@aqshai:~$ dev-skins --install whatsapp \   │
@@ -147,8 +149,9 @@ Your name and host are limited to letters, numbers, `-` and `_`, so a typo can n
 **1. Get the code**
 
 ```bash
-git clone https://github.com/<your-username>/dev-skins.git
-cd dev-skins
+git clone https://github.com/DEV-Aqshai/TerminalThemed-Chrome-Extensions.git 
+
+cd TerminalThemed-Chrome-Extensions
 ```
 
 No git? Click **Code → Download ZIP** on GitHub and unzip it.
@@ -158,7 +161,7 @@ No git? Click **Code → Download ZIP** on GitHub and unzip it.
 1. Open `chrome://extensions`
 2. Switch on **Developer mode** (top right)
 3. Click **Load unpacked**
-4. Select the folder, e.g. `dev-skins/wa-dev`
+4. Select the folder, e.g. `TerminalThemed-Chrome-Extensions/wa-dev`
 5. Open the site (or refresh it) and the skin appears
 
 Repeat for the other folders. Pin the extension icons to your toolbar to reach the settings popup quickly.
@@ -696,8 +699,6 @@ Released under the [MIT License](./LICENSE). Copyright © 2026 Devz (AqshaiDev).
 <div align="center">
 
 **Built by Devz · AqshaiDev**
-
-*Ship complete. Skin everything.*
 
 `devz@aqshai:~$ █`
 
