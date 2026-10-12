@@ -50,10 +50,10 @@ Three Chrome extensions. One hacker-clean design language. Built for developers.
   <p align="center">
     <img src="docs/whatsapp.png" width="50%" alt="wa-dev on WhatsApp Web">
      <img src="docs/whatsapp-M.png" width="32%" alt="wa-dev on WhatsApp Web">
-     <br>
+     <br><hr>
     <img src="docs/youtube.png"  width="50%" alt="yt-dev on YouTube">
     <img src="docs/youtube-M.png"  width="32%" alt="yt-dev on YouTube">
-    <br>
+    <br><hr>
     <img src="docs/discord.png"  width="50%" alt="dc-dev on Discord">
     <img src="docs/discord-M.png"  width="32%" alt="dc-dev on Discord">
   </p>
@@ -153,9 +153,9 @@ Your name and host are limited to letters, numbers, `-` and `_`, so a typo can n
 **1. Get the code**
 
 ```bash
-git clone https://github.com/DEV-Aqshai/TerminalThemed-Chrome-Extensions.git 
+git clone https://github.com/DEV-Aqshai/devz-skins.git 
 
-cd TerminalThemed-Chrome-Extensions
+cd devz-skins
 ```
 
 No git? Click **Code → Download ZIP** on GitHub and unzip it.
@@ -165,7 +165,7 @@ No git? Click **Code → Download ZIP** on GitHub and unzip it.
 1. Open `chrome://extensions`
 2. Switch on **Developer mode** (top right)
 3. Click **Load unpacked**
-4. Select the folder, e.g. `TerminalThemed-Chrome-Extensions/wa-dev`
+4. Select the folder, e.g. `devz-skins/wa-dev`
 5. Open the site (or refresh it) and the skin appears
 
 Repeat for the other folders. Pin the extension icons to your toolbar to reach the settings popup quickly.
