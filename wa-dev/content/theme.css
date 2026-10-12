@@ -1,0 +1,284 @@
+/* wa-dev: WhatsApp Web, developer skin
+   tokens live on :root; the skin itself is scoped to html.dz-on */
+
+:root {
+  --dz-bg: #090d12;
+  --dz-panel: #0d131a;
+  --dz-raise: #121b24;
+  --dz-line: #1c2733;
+  --dz-text: #cdd7e2;
+  --dz-dim: #5f7184;
+  --dz-accent: #4dffa0;
+  --dz-accent-rgb: 77, 255, 160;
+  --dz-fs: 13px;
+  --dz-bar-h: 26px;
+  --dz-font: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", Menlo, Consolas,
+    "Noto Sans Tamil", "Nirmala UI", "Latha", monospace;
+}
+
+/* ---------- WhatsApp variable overrides ---------- */
+html.dz-on,
+html.dz-on body,
+html.dz-on #app {
+  --app-background: var(--dz-bg) !important;
+  --background-default: var(--dz-panel) !important;
+  --background-default-hover: var(--dz-raise) !important;
+  --background-default-active: var(--dz-raise) !important;
+  --panel-background: var(--dz-panel) !important;
+  --panel-header-background: var(--dz-panel) !important;
+  --drawer-background: var(--dz-panel) !important;
+  --conversation-panel-background: var(--dz-bg) !important;
+  --compose-panel-background: var(--dz-panel) !important;
+  --compose-input-background: var(--dz-raise) !important;
+  --search-input-background: var(--dz-raise) !important;
+  --search-input-container-background: var(--dz-panel) !important;
+  --rich-text-panel-background: var(--dz-panel) !important;
+  --startup-background: var(--dz-bg) !important;
+  --incoming-background: var(--dz-raise) !important;
+  --outgoing-background: color-mix(in srgb, var(--dz-accent) 13%, var(--dz-panel)) !important;
+  --primary-strong: var(--dz-text) !important;
+  --primary: var(--dz-text) !important;
+  --secondary: var(--dz-dim) !important;
+  --secondary-lighter: var(--dz-dim) !important;
+  --message-primary: var(--dz-text) !important;
+  --message-secondary: var(--dz-dim) !important;
+  --bubble-meta: var(--dz-dim) !important;
+  --icon: var(--dz-dim) !important;
+  --icon-lighter: var(--dz-dim) !important;
+  --panel-header-icon: var(--dz-dim) !important;
+  --border-list: var(--dz-line) !important;
+  --border-stronger: var(--dz-line) !important;
+  --conversation-panel-border: var(--dz-line) !important;
+  --teal: var(--dz-accent) !important;
+  --teal-hover: var(--dz-accent) !important;
+  --unread-marker-background: var(--dz-accent) !important;
+  --WDS-surface-default: var(--dz-panel) !important;
+  --WDS-surface-highlight: var(--dz-raise) !important;
+  --WDS-content-default: var(--dz-text) !important;
+  --WDS-content-deemphasized: var(--dz-dim) !important;
+}
+
+/* ---------- surfaces ---------- */
+html.dz-on,
+html.dz-on body,
+html.dz-on #app {
+  background: var(--dz-bg) !important;
+  color: var(--dz-text) !important;
+}
+html.dz-on #side,
+html.dz-on #pane-side,
+html.dz-on #side header,
+html.dz-on #main header,
+html.dz-on #main footer {
+  background: var(--dz-panel) !important;
+}
+html.dz-on #side header,
+html.dz-on #main header { border-bottom: 1px solid var(--dz-line) !important; }
+html.dz-on #main footer { border-top: 1px solid var(--dz-line) !important; }
+html.dz-on #side { border-right: 1px solid var(--dz-line) !important; }
+
+/* monospace everywhere; Tamil falls through to the listed Tamil fonts */
+html.dz-on :where(body, #app, #app *) { font-family: var(--dz-font) !important; }
+
+/* wallpaper -> dot grid */
+html.dz-on #main [data-asset-chat-background-dark],
+html.dz-on #main [data-asset-chat-background-light] {
+  opacity: 1 !important;
+  background-color: transparent !important;
+  background-image: radial-gradient(rgba(var(--dz-accent-rgb), 0.09) 1px, transparent 1px) !important;
+  background-size: 22px 22px !important;
+}
+
+/* ---------- chat list ---------- */
+html.dz-on #pane-side [aria-selected="true"] {
+  background: rgba(var(--dz-accent-rgb), 0.08) !important;
+  box-shadow: inset 2px 0 0 var(--dz-accent);
+}
+html.dz-on #pane-side span[aria-label*="nread"] {
+  background: var(--dz-accent) !important;
+  color: #04110a !important;
+  border-radius: 3px !important;
+  font-weight: 700;
+}
+
+/* ---------- messages ---------- */
+html.dz-on :is(.message-in, .message-out) .selectable-text {
+  font-size: var(--dz-fs) !important;
+  line-height: 1.55 !important;
+}
+html.dz-on [data-dz-bubble] {
+  border-radius: 3px !important;
+  border: 1px solid var(--dz-line) !important;
+  box-shadow: inset 2px 0 0 var(--dz-dim) !important;
+}
+html.dz-on .message-out [data-dz-bubble] {
+  border-color: rgba(var(--dz-accent-rgb), 0.35) !important;
+  box-shadow: inset 2px 0 0 var(--dz-accent) !important;
+}
+html.dz-on [data-icon^="tail-"] { display: none !important; }
+html.dz-on .selectable-text a { color: var(--dz-accent) !important; }
+
+/* ---------- composer ---------- */
+html.dz-on footer [contenteditable="true"] { caret-color: var(--dz-accent); }
+
+/* ---------- selection + scrollbars ---------- */
+html.dz-on ::selection { background: rgba(var(--dz-accent-rgb), 0.3); }
+html.dz-on * { scrollbar-width: thin; scrollbar-color: var(--dz-line) transparent; }
+
+/* ---------- code blocks ---------- */
+html.dz-code #main code {
+  font-family: var(--dz-font) !important;
+  font-size: calc(var(--dz-fs) - 0.5px) !important;
+  background: #0a1017 !important;
+  color: #d4dee8 !important;
+  border: 1px solid var(--dz-line);
+  border-radius: 3px;
+  padding: 1px 5px;
+  white-space: pre-wrap;
+  cursor: copy;
+}
+::highlight(dz-kw)  { color: #c792ea; }
+::highlight(dz-str) { color: #ecc48d; }
+::highlight(dz-num) { color: #f78c6c; }
+::highlight(dz-com) { color: #5f7184; }
+::highlight(dz-fn)  { color: #82aaff; }
+::highlight(dz-ty)  { color: #7fdbca; }
+
+/* ---------- stealth: blur until hover / blur when tab is away ---------- */
+html:is(.dz-stealth, .dz-away) #pane-side [role="row"],
+html:is(.dz-stealth, .dz-away) #pane-side [role="listitem"],
+html:is(.dz-stealth, .dz-away) #main .message-in,
+html:is(.dz-stealth, .dz-away) #main .message-out {
+  filter: blur(7px) !important;
+  transition: filter 0.12s;
+}
+html.dz-stealth:not(.dz-away) #pane-side [role="row"]:hover,
+html.dz-stealth:not(.dz-away) #pane-side [role="listitem"]:hover,
+html.dz-stealth:not(.dz-away) #main .message-in:hover,
+html.dz-stealth:not(.dz-away) #main .message-out:hover {
+  filter: none !important;
+}
+
+/* ---------- scanlines ---------- */
+html.dz-scan::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2147482000;
+  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.16) 0 1px, transparent 1px 3px);
+}
+
+/* ---------- status bar (tmux-style) ---------- */
+#dz-bar {
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--dz-bar-h);
+  z-index: 2147483000;
+  align-items: stretch;
+  background: #070a0e;
+  border-top: 1px solid var(--dz-line);
+  font: 12px/1 var(--dz-font);
+  color: var(--dz-dim);
+  user-select: none;
+}
+html.dz-bar #dz-bar { display: flex; }
+html.dz-bar #app {
+  height: calc(100vh - var(--dz-bar-h)) !important;
+  max-height: calc(100vh - var(--dz-bar-h)) !important;
+}
+#dz-bar .dz-seg {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  white-space: nowrap;
+}
+#dz-bar .dz-sess { background: var(--dz-accent); color: #04110a; font-weight: 700; }
+#dz-bar .dz-cur {
+  background: var(--dz-line);
+  color: var(--dz-text);
+  max-width: 40vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  line-height: calc(var(--dz-bar-h) - 1px);
+}
+#dz-bar .dz-fill { flex: 1; }
+#dz-bar .dz-ok { color: var(--dz-accent); }
+#dz-bar .dz-bad { color: #ff5c6c; }
+#dz-bar .dz-unread { color: #04110a; background: var(--dz-accent); font-weight: 700; }
+#dz-bar .dz-caret { color: var(--dz-accent); animation: dz-blink 1.1s steps(1) infinite; }
+@keyframes dz-blink { 50% { opacity: 0; } }
+
+/* ---------- toast ---------- */
+#dz-toast {
+  position: fixed;
+  right: 12px;
+  bottom: calc(var(--dz-bar-h) + 12px);
+  max-width: 60vw;
+  padding: 7px 11px;
+  background: var(--dz-panel);
+  border: 1px solid rgba(var(--dz-accent-rgb), 0.45);
+  color: var(--dz-accent);
+  font: 12px/1.4 var(--dz-font);
+  z-index: 2147483100;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.15s, transform 0.15s;
+  pointer-events: none;
+}
+#dz-toast.on { opacity: 1; transform: none; }
+
+/* ---------- command palette ---------- */
+#dz-pal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 2147483200;
+  background: rgba(0, 0, 0, 0.55);
+  font: 13px/1.4 var(--dz-font);
+}
+#dz-pal.on { display: block; }
+#dz-pal .dz-box {
+  width: min(640px, 92vw);
+  margin: 14vh auto 0;
+  background: var(--dz-panel);
+  border: 1px solid rgba(var(--dz-accent-rgb), 0.5);
+  color: var(--dz-text);
+}
+#dz-pal .dz-in { display: flex; align-items: center; border-bottom: 1px solid var(--dz-line); }
+#dz-pal .dz-ps { padding: 0 6px 0 12px; color: var(--dz-accent); font-weight: 700; }
+#dz-pal input {
+  flex: 1;
+  padding: 12px 12px 12px 0;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: var(--dz-text);
+  font: inherit;
+  caret-color: var(--dz-accent);
+}
+#dz-pal .dz-row {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  padding: 7px 12px;
+  border-left: 2px solid transparent;
+  cursor: pointer;
+}
+#dz-pal .dz-row.sel {
+  background: rgba(var(--dz-accent-rgb), 0.1);
+  border-left-color: var(--dz-accent);
+}
+#dz-pal .dz-k { width: 74px; flex: none; color: var(--dz-dim); }
+#dz-pal .dz-l { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#dz-pal .dz-hint { color: var(--dz-dim); }
+#dz-pal .dz-empty { padding: 12px; color: var(--dz-dim); }
+
+@media (prefers-reduced-motion: reduce) {
+  #dz-bar .dz-caret { animation: none; }
+  #dz-toast { transition: none; }
+}

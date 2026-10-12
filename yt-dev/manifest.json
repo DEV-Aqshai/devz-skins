@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "yt-dev: YouTube for developers",
+  "version": "1.0.0",
+  "description": "Terminal-style YouTube. Dev skin, focus toggles, tmux status bar, command palette, A-B loop, timestamp links.",
+  "permissions": ["storage"],
+  "host_permissions": ["https://www.youtube.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "css": ["content/theme.css"],
+      "js": ["shared/defaults.js", "shared/apply.js", "content/early.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "js": ["shared/defaults.js", "shared/apply.js", "content/content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "yt-dev",
+    "default_popup": "popup/popup.html",
+    "default_icon": { "16": "icons/16.png", "48": "icons/48.png", "128": "icons/128.png" }
+  },
+  "icons": { "16": "icons/16.png", "48": "icons/48.png", "128": "icons/128.png" }
+}

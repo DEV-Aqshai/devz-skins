@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>wa-dev</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header><span class="ps">devz@aqshai:~$</span> wa-dev --config</header>
+  <main>
+    <section id="flags" aria-label="features"></section>
+
+    <section>
+      <div class="label">accent</div>
+      <div id="accents" class="accents"></div>
+    </section>
+
+    <section>
+      <label class="label" for="fs">font size <b id="fsv"></b></label>
+      <input id="fs" type="range" min="11" max="16" step="1">
+    </section>
+
+    <section>
+      <label class="label" for="snips">snippets: name = text, expand with ;name then Tab</label>
+      <textarea id="snips" rows="6" spellcheck="false"></textarea>
+    </section>
+
+    <footer>
+      <span>^k palette</span>
+      <span>alt+c code block</span>
+      <span>alt+j json</span>
+      <span>alt+b blur</span>
+    </footer>
+  </main>
+  <script src="../shared/defaults.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

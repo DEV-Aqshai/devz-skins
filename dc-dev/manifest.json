@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "dc-dev: Discord for developers",
+  "version": "1.0.1",
+  "description": "Terminal-style Discord web. Dev skin, code colors, tmux status bar, command palette, snippets, ID copy, Discord timestamps.",
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://discord.com/channels/*",
+        "https://discord.com/app*",
+        "https://discord.com/login*",
+        "https://canary.discord.com/channels/*",
+        "https://canary.discord.com/app*",
+        "https://ptb.discord.com/channels/*",
+        "https://ptb.discord.com/app*"
+      ],
+      "css": ["content/theme.css"],
+      "js": ["shared/defaults.js", "shared/apply.js", "content/early.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://discord.com/channels/*",
+        "https://discord.com/app*",
+        "https://canary.discord.com/channels/*",
+        "https://canary.discord.com/app*",
+        "https://ptb.discord.com/channels/*",
+        "https://ptb.discord.com/app*"
+      ],
+      "js": ["shared/defaults.js", "shared/apply.js", "content/content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "dc-dev",
+    "default_popup": "popup/popup.html",
+    "default_icon": { "16": "icons/16.png", "48": "icons/48.png", "128": "icons/128.png" }
+  },
+  "icons": { "16": "icons/16.png", "48": "icons/48.png", "128": "icons/128.png" }
+}

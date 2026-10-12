@@ -1,0 +1,357 @@
+/* dc-dev: Discord developer skin
+   hooks used:
+   - theme variables on .theme-dark / .visual-refresh:
+     --background-primary/secondary/tertiary/floating, --text-normal/muted/link,
+     --header-primary, --channeltextarea-background, and the newer --background-base-* set
+   - Discord's own highlight.js classes (.hljs-*) inside code blocks
+   - stable attributes: li[id^="chat-messages-"], [id^="message-content-"],
+     [role="textbox"][data-slate-editor], nav[aria-label="Servers sidebar"]
+   - partial class names ([class*="chatContent"]) because the hashed suffixes change
+   Everything is scoped to html.dd-* classes toggled by the extension. */
+
+:root {
+  --dd-bg: #090d12;
+  --dd-panel: #0d131a;
+  --dd-raise: #121b24;
+  --dd-deep: #070a0e;
+  --dd-line: #1c2733;
+  --dd-text: #cdd7e2;
+  --dd-dim: #7a8ca0;
+  --dd-accent: #4dffa0;
+  --dd-accent-rgb: 77, 255, 160;
+  --dd-bar-h: 26px;
+  --dd-r: 2px;
+  --dd-font: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", Menlo, Consolas,
+    "Noto Sans Tamil", "Nirmala UI", "Latha", monospace;
+}
+
+/* ---------- 1. theme variables ---------- */
+html[data-dd~="on"],
+html[data-dd~="on"] body,
+html[data-dd~="on"] #app-mount,
+html[data-dd~="on"] [class*="theme-"],
+html[data-dd~="on"] .visual-refresh {
+  color-scheme: dark !important;
+  /* classic names */
+  --background-primary: var(--dd-bg) !important;
+  --background-secondary: var(--dd-panel) !important;
+  --background-secondary-alt: var(--dd-deep) !important;
+  --background-tertiary: var(--dd-deep) !important;
+  --background-floating: var(--dd-panel) !important;
+  --background-accent: var(--dd-line) !important;
+  --background-modifier-hover: rgba(var(--dd-accent-rgb), 0.05) !important;
+  --background-modifier-active: rgba(var(--dd-accent-rgb), 0.1) !important;
+  --background-modifier-selected: rgba(var(--dd-accent-rgb), 0.1) !important;
+  --background-modifier-accent: var(--dd-line) !important;
+  --background-message-hover: rgba(255, 255, 255, 0.025) !important;
+  --background-mentioned: rgba(var(--dd-accent-rgb), 0.08) !important;
+  --background-mentioned-hover: rgba(var(--dd-accent-rgb), 0.12) !important;
+  --message-mentioned-background: rgba(var(--dd-accent-rgb), 0.08) !important;
+  --message-mentioned-background-hover: rgba(var(--dd-accent-rgb), 0.12) !important;
+  --channeltextarea-background: var(--dd-raise) !important;
+  --input-background: var(--dd-raise) !important;
+  --modal-background: var(--dd-panel) !important;
+  --modal-footer-background: var(--dd-deep) !important;
+  --home-background: var(--dd-bg) !important;
+  --deprecated-card-bg: var(--dd-panel) !important;
+  --text-normal: var(--dd-text) !important;
+  --text-muted: var(--dd-dim) !important;
+  --text-link: var(--dd-accent) !important;
+  --text-link-low-saturation: var(--dd-accent) !important;
+  --text-positive: var(--dd-accent) !important;
+  --header-primary: var(--dd-text) !important;
+  --header-secondary: var(--dd-dim) !important;
+  --interactive-normal: var(--dd-dim) !important;
+  --interactive-hover: var(--dd-text) !important;
+  --interactive-active: var(--dd-accent) !important;
+  --channels-default: var(--dd-dim) !important;
+  --channel-icon: var(--dd-dim) !important;
+  --brand-experiment: var(--dd-accent) !important;
+  --brand-experiment-560: var(--dd-accent) !important;
+  --brand-500: var(--dd-accent) !important;
+  --brand-530: var(--dd-accent) !important;
+  --brand-560: var(--dd-accent) !important;
+  --mention-foreground: var(--dd-accent) !important;
+  --mention-background: rgba(var(--dd-accent-rgb), 0.15) !important;
+  --scrollbar-thin-thumb: var(--dd-line) !important;
+  --scrollbar-thin-track: transparent !important;
+  --scrollbar-auto-thumb: var(--dd-line) !important;
+  --scrollbar-auto-track: transparent !important;
+  /* refreshed-design names */
+  --background-base-lowest: var(--dd-deep) !important;
+  --background-base-lower: var(--dd-deep) !important;
+  --background-base-low: var(--dd-panel) !important;
+  --background-surface-high: var(--dd-panel) !important;
+  --background-surface-higher: var(--dd-raise) !important;
+  --background-surface-highest: var(--dd-raise) !important;
+  --chat-background-default: var(--dd-bg) !important;
+  --background-mod-subtle: rgba(var(--dd-accent-rgb), 0.05) !important;
+  --background-mod-normal: rgba(var(--dd-accent-rgb), 0.08) !important;
+  --background-mod-strong: rgba(var(--dd-accent-rgb), 0.12) !important;
+  --text-default: var(--dd-text) !important;
+  --text-strong: var(--dd-text) !important;
+  --text-subtle: var(--dd-dim) !important;
+  --border-subtle: var(--dd-line) !important;
+  --border-normal: var(--dd-line) !important;
+  --border-strong: var(--dd-line) !important;
+}
+
+/* ---------- 2. surfaces ---------- */
+html[data-dd~="on"],
+html[data-dd~="on"] body,
+html[data-dd~="on"] #app-mount {
+  background: var(--dd-bg) !important;
+  color: var(--dd-text);
+}
+html[data-dd~="on"] [class*="sidebar"]:not([class*="sidebarList"]),
+html[data-dd~="on"] nav[aria-label="Servers sidebar"] {
+  border-right: 1px solid var(--dd-line);
+}
+html[data-dd~="on"] [class*="chat"] > [class*="subtitleContainer"],
+html[data-dd~="on"] [class*="title"][class*="container"] {
+  border-bottom: 1px solid var(--dd-line) !important;
+  box-shadow: none !important;
+}
+
+/* ---------- 3. type ---------- */
+html[data-dd~="mono"],
+html[data-dd~="mono"] body,
+html[data-dd~="mono"] [class*="theme-"] {
+  --font-primary: var(--dd-font) !important;
+  --font-display: var(--dd-font) !important;
+  --font-headline: var(--dd-font) !important;
+  --font-code: var(--dd-font) !important;
+}
+html[data-dd~="mono"] :where(body, #app-mount, #app-mount *) {
+  font-family: var(--dd-font) !important;
+  letter-spacing: -0.01em;
+}
+html[data-dd~="on"] :is([id^="message-content-"], [class*="markup"]) {
+  font-size: 14px !important;
+  line-height: 1.55 !important;
+}
+
+/* ---------- 4. square corners ---------- */
+html[data-dd~="on"] :is(
+  [class*="channelTextArea"], [class*="scrollableContainer"],
+  [class*="searchBar"], [class*="quickswitcher"], [class*="popout"],
+  [class*="menu_"], [class*="layer"] [role="dialog"], [class*="modal"],
+  [class*="embedWrapper"], [class*="attachment"], [class*="container"][class*="reaction"],
+  [class*="reactionInner"], [class*="button"][class*="lookFilled"],
+  [class*="lookFilled"], [class*="lookOutlined"],
+  [class*="searchResult"], [class*="tooltip"], [class*="inputDefault"], [class*="textArea"]
+) { border-radius: var(--dd-r) !important; }
+
+html[data-dd~="on"] [class*="scrollableContainer"] {
+  border: 1px solid var(--dd-line) !important;
+}
+html[data-dd~="on"] [class*="scrollableContainer"]:focus-within {
+  border-color: var(--dd-accent) !important;
+}
+html[data-dd~="on"] [role="textbox"][data-slate-editor="true"] { caret-color: var(--dd-accent); }
+html[data-dd~="on"] [class*="channelTextArea"] [class*="placeholder"]::before {
+  content: "$ ";
+  color: var(--dd-accent);
+}
+
+/* square avatars + server icons */
+html[data-dd~="square"] foreignObject[mask*="svg-mask-avatar"] { mask: none !important; }
+html[data-dd~="square"] :is(
+  [class*="avatar"] img, img[class*="avatar"], [class*="avatarStack"] img,
+  nav[aria-label="Servers sidebar"] [class*="childWrapper"],
+  nav[aria-label="Servers sidebar"] [class*="icon"],
+  nav[aria-label="Servers sidebar"] img
+) { border-radius: 3px !important; }
+
+/* ---------- 5. messages ---------- */
+html[data-dd~="on"] span.mention,
+html[data-dd~="on"] [class*="mention"][class*="wrapper"] {
+  color: var(--dd-accent) !important;
+  background: rgba(var(--dd-accent-rgb), 0.15) !important;
+  border-radius: var(--dd-r) !important;
+}
+html[data-dd~="on"] [id^="message-username-"] { font-weight: 700; }
+html[data-dd~="on"] [class*="timestamp"] { color: var(--dd-dim) !important; }
+html[data-dd~="on"] [class*="unreadMentionsBar"], html[data-dd~="on"] [class*="newMessagesBar"] {
+  background: var(--dd-accent) !important;
+  color: #04110a !important;
+  border-radius: 0 !important;
+}
+html[data-dd~="on"] [class*="divider"][class*="isUnread"] { border-color: var(--dd-accent) !important; }
+
+/* ---------- 6. code blocks (Discord ships highlight.js) ---------- */
+html[data-dd~="on"] pre,
+html[data-dd~="on"] code.inline,
+html[data-dd~="on"] [class*="codeContainer"] {
+  font-family: var(--dd-font) !important;
+  background: #0a1017 !important;
+  border: 1px solid var(--dd-line) !important;
+  border-radius: 3px !important;
+  color: #d4dee8;
+}
+html[data-dd~="on"] pre code, html[data-dd~="on"] pre code.hljs {
+  font-family: var(--dd-font) !important;
+  background: transparent !important;
+  color: #d4dee8;
+}
+html[data-dd~="on"] .hljs-keyword, html[data-dd~="on"] .hljs-selector-tag, html[data-dd~="on"] .hljs-meta .hljs-keyword,
+html[data-dd~="on"] .hljs-doctag, html[data-dd~="on"] .hljs-formula { color: #c792ea !important; }
+html[data-dd~="on"] .hljs-string, html[data-dd~="on"] .hljs-regexp, html[data-dd~="on"] .hljs-template-variable,
+html[data-dd~="on"] .hljs-addition, html[data-dd~="on"] .hljs-meta .hljs-string { color: #ecc48d !important; }
+html[data-dd~="on"] .hljs-number, html[data-dd~="on"] .hljs-literal, html[data-dd~="on"] .hljs-symbol,
+html[data-dd~="on"] .hljs-bullet { color: #f78c6c !important; }
+html[data-dd~="on"] .hljs-comment, html[data-dd~="on"] .hljs-quote, html[data-dd~="on"] .hljs-deletion { color: #5f7184 !important; }
+html[data-dd~="on"] .hljs-title, html[data-dd~="on"] .hljs-function .hljs-title, html[data-dd~="on"] .hljs-section,
+html[data-dd~="on"] .hljs-selector-id, html[data-dd~="on"] .hljs-selector-class { color: #82aaff !important; }
+html[data-dd~="on"] .hljs-type, html[data-dd~="on"] .hljs-built_in, html[data-dd~="on"] .hljs-class .hljs-title,
+html[data-dd~="on"] .hljs-attr, html[data-dd~="on"] .hljs-attribute, html[data-dd~="on"] .hljs-property,
+html[data-dd~="on"] .hljs-variable, html[data-dd~="on"] .hljs-name, html[data-dd~="on"] .hljs-tag { color: #7fdbca !important; }
+html[data-dd~="on"] .hljs-params, html[data-dd~="on"] .hljs-subst { color: #d4dee8 !important; }
+
+/* ---------- 7. focus toggles ---------- */
+html[data-dd~="nomembers"] :is([class*="membersWrap"], aside[aria-label="Members"]) { display: none !important; }
+html[data-dd~="noactivity"] :is([class*="nowPlayingColumn"], [class*="activityFeed"]) { display: none !important; }
+html[data-dd~="nonitro"] :is(
+  li:has(> a[href="/store"]), li:has(> a[href="/shop"]), li:has(> a[href="/quest-home"]),
+  [class*="channel"]:has(> a[href="/store"]), [class*="channel"]:has(> a[href="/shop"]),
+  [class*="channel"]:has(> a[href="/quest-home"]),
+  [class*="buttonContainer"]:has([aria-label="Send a gift"]),
+  [aria-label="Send a gift"]
+) { display: none !important; }
+html[data-dd~="nogifs"] :is(
+  [class*="buttonContainer"]:has([aria-label="Open GIF picker"]),
+  [class*="buttonContainer"]:has([aria-label="Open sticker picker"]),
+  [aria-label="Open GIF picker"], [aria-label="Open sticker picker"]
+) { display: none !important; }
+
+/* ---------- 8. stealth: blur until hover / blur when tab is away ---------- */
+html:is([data-dd~="stealth"], [data-dd~="away"]) :is(
+  li[id^="chat-messages-"],
+  [data-list-item-id^="private-channels"],
+  [data-list-item-id^="channels___"]
+) {
+  filter: blur(7px) !important;
+  transition: filter 0.12s;
+}
+html[data-dd~="stealth"]:not([data-dd~="away"]) :is(
+  li[id^="chat-messages-"], [data-list-item-id^="private-channels"], [data-list-item-id^="channels___"]
+):hover { filter: none !important; }
+
+/* ---------- 9. selection, scrollbars, scanlines ---------- */
+html[data-dd~="on"] ::selection { background: rgba(var(--dd-accent-rgb), 0.3); }
+html[data-dd~="on"], html[data-dd~="on"] * { scrollbar-color: var(--dd-line) transparent; }
+html[data-dd~="scan"]::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2147482000;
+  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.16) 0 1px, transparent 1px 3px);
+}
+
+/* ---------- 10. status bar (tmux-style) ---------- */
+#dd-bar {
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--dd-bar-h);
+  z-index: 2147483000;
+  align-items: stretch;
+  background: var(--dd-deep);
+  border-top: 1px solid var(--dd-line);
+  font: 12px/1 var(--dd-font);
+  color: var(--dd-dim);
+  user-select: none;
+}
+html[data-dd~="bar"] #dd-bar { display: flex; }
+html[data-dd~="bar"] #app-mount {
+  height: calc(100vh - var(--dd-bar-h)) !important;
+  max-height: calc(100vh - var(--dd-bar-h)) !important;
+  overflow: hidden;
+}
+#dd-bar .dd-seg { display: flex; align-items: center; padding: 0 10px; white-space: nowrap; }
+#dd-bar .dd-sess { background: var(--dd-accent); color: #04110a; font-weight: 700; }
+#dd-bar .dd-cur {
+  display: block;
+  background: var(--dd-line);
+  color: var(--dd-text);
+  max-width: 50vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: calc(var(--dd-bar-h) - 1px);
+}
+#dd-bar .dd-fill { flex: 1; }
+#dd-bar .dd-ok { color: var(--dd-accent); }
+#dd-bar .dd-bad { color: #ff5c6c; }
+#dd-bar .dd-unread { background: var(--dd-accent); color: #04110a; font-weight: 700; }
+#dd-bar .dd-caret { color: var(--dd-accent); animation: dd-blink 1.1s steps(1) infinite; }
+@keyframes dd-blink { 50% { opacity: 0; } }
+
+/* ---------- 11. toast ---------- */
+#dd-toast {
+  position: fixed;
+  right: 12px;
+  bottom: calc(var(--dd-bar-h) + 12px);
+  max-width: 60vw;
+  padding: 7px 11px;
+  background: var(--dd-panel);
+  border: 1px solid rgba(var(--dd-accent-rgb), 0.45);
+  color: var(--dd-accent);
+  font: 12px/1.4 var(--dd-font);
+  z-index: 2147483100;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.15s, transform 0.15s;
+  pointer-events: none;
+}
+#dd-toast.on { opacity: 1; transform: none; }
+
+/* ---------- 12. command palette ---------- */
+#dd-pal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 2147483200;
+  background: rgba(0, 0, 0, 0.55);
+  font: 13px/1.4 var(--dd-font);
+}
+#dd-pal.on { display: block; }
+#dd-pal .dd-box {
+  width: min(640px, 92vw);
+  margin: 14vh auto 0;
+  background: var(--dd-panel);
+  border: 1px solid rgba(var(--dd-accent-rgb), 0.5);
+  color: var(--dd-text);
+}
+#dd-pal .dd-in { display: flex; align-items: center; border-bottom: 1px solid var(--dd-line); }
+#dd-pal .dd-ps { padding: 0 6px 0 12px; color: var(--dd-accent); font-weight: 700; }
+#dd-pal input {
+  flex: 1;
+  padding: 12px 12px 12px 0;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: var(--dd-text);
+  font: inherit;
+  caret-color: var(--dd-accent);
+}
+#dd-pal .dd-row {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  padding: 7px 12px;
+  border-left: 2px solid transparent;
+  cursor: pointer;
+}
+#dd-pal .dd-row.sel { background: rgba(var(--dd-accent-rgb), 0.1); border-left-color: var(--dd-accent); }
+#dd-pal .dd-k { width: 74px; flex: none; color: var(--dd-dim); }
+#dd-pal .dd-l { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#dd-pal .dd-hint { color: var(--dd-dim); }
+#dd-pal .dd-empty { padding: 12px; color: var(--dd-dim); }
+
+@media (prefers-reduced-motion: reduce) {
+  #dd-bar .dd-caret { animation: none; }
+  #dd-toast { transition: none; }
+}

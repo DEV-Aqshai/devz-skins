@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "wa-dev: WhatsApp Web for developers",
+  "version": "1.0.0",
+  "description": "Terminal-style WhatsApp Web. Dev theme, syntax-colored code, command palette, snippets, tmux status bar.",
+  "permissions": ["storage"],
+  "host_permissions": ["https://web.whatsapp.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://web.whatsapp.com/*"],
+      "css": ["content/theme.css"],
+      "js": ["content/early.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["https://web.whatsapp.com/*"],
+      "js": ["shared/defaults.js", "content/content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "wa-dev",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/16.png",
+      "48": "icons/48.png",
+      "128": "icons/128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  }
+}
