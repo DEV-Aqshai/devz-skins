@@ -44,16 +44,20 @@ Three Chrome extensions. One hacker-clean design language. Built for developers.
 > [!NOTE]
 > Built by **Devz** (**AqshaiDev**), an independent developer who builds complete, deployable projects. Fork it, rename it, make it yours. **Not a developer?** On Windows, double-click `Customize-DevSkins.bat` and it does the customizing for you ([Easy install](#-easy-install-windows-no-coding)).
 
-<!--
-  SCREENSHOTS: add your own and uncomment.
-  Put images in a /docs folder, then:
+
+
 
   <p align="center">
-    <img src="docs/whatsapp.png" width="32%" alt="wa-dev on WhatsApp Web">
-    <img src="docs/youtube.png"  width="32%" alt="yt-dev on YouTube">
-    <img src="docs/discord.png"  width="32%" alt="dc-dev on Discord">
+    <img src="docs/whatsapp.png" width="50%" alt="wa-dev on WhatsApp Web">
+     <img src="docs/whatsapp-M.png" width="32%" alt="wa-dev on WhatsApp Web">
+     <br>
+    <img src="docs/youtube.png"  width="50%" alt="yt-dev on YouTube">
+    <img src="docs/youtube-M.png"  width="32%" alt="yt-dev on YouTube">
+    <br>
+    <img src="docs/discord.png"  width="50%" alt="dc-dev on Discord">
+    <img src="docs/discord-M.png"  width="32%" alt="dc-dev on Discord">
   </p>
--->
+
 
 ---
 
